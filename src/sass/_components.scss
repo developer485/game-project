@@ -1,0 +1,125 @@
+// Mixins
+@mixin score-board-box {
+    display: inline;
+    padding: 1.75rem 3rem;
+    border: 1px solid grey;
+    background-color: #EEE;
+    color: $color-black;
+}
+
+@mixin box-align {
+    width: 50%;
+    text-align: center;
+    border-top: 2px solid $color-white;     
+}
+
+@mixin renderScore {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin circle($url) {
+    padding: 3rem;
+    margin-bottom: 1rem;
+    width: 10rem;
+    height: 10rem;
+    border: 3px solid grey;
+    border-radius: 50%;
+
+    // Set Image
+    background-image: url($url);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    &:hover {
+        opacity: .8;
+    }
+}
+
+// header
+#page {
+
+    .container {
+        background-color: #010b13;
+        height: 100vh;
+
+        p {
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+        }
+
+        .render-score-board {
+            margin-top: 3rem;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+
+            .score-text {
+                margin-bottom: .5rem;
+            }
+            
+            .score-board__1 {
+                @include renderScore();
+
+                .player-score {
+                    @include score-board-box();
+                }
+            }
+
+            .score-board__tie {
+                @include renderScore();
+                
+                .score-tie {
+                    @include score-board-box();
+                }
+            }
+
+            .score-board__2 {
+                @include renderScore();
+                
+                .computer-score {
+                    @include score-board-box();
+                }
+            }
+        }
+
+        .boxes {
+            width: 100%;
+            height: 100%;
+            margin-top: 3rem;
+            display: flex;
+
+            .box-1{
+                border-right: 2px solid $color-white;
+                @include box-align();
+
+                .row {
+                    width: 100%;
+                    padding-top: 2rem;
+                    display: flex;
+                    justify-content: space-evenly;
+
+                    .col-1-of-3 {      
+                        .rock {
+                            @include circle('../images/rock.png');
+                        }
+                        
+                        .paper {
+                            @include circle('../images/paper.png');
+                        }
+
+                        .scissor {
+                            @include circle('../images/scissor.png');
+                        }
+                    }
+                }
+            }   
+
+            .box-2 {
+                @include box-align();                    
+            }
+        }
+    }
+}
